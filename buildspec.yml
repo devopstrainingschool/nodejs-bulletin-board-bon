@@ -23,8 +23,8 @@ phases:
 artifacts:
   files:
     - "**/*"
-   # - discard-paths: no
-  #  - base-directory: .
+  discard-paths: no
+  base-directory: build
    # - app.js
   #  - index.html
   #  - package.json

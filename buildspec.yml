@@ -13,7 +13,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Compiling the Node.js code
-      - node server.js
+      - npm run build
+     # - node server.js
   post_build:
     commands:
       - echo Build completed on `date`
@@ -24,8 +25,8 @@ phases:
 artifacts:
   files:
     - "**/*"
- # discard-paths: no
-#  base-directory: build
+  discard-paths: no
+  base-directory: build
    # - app.js
   #  - index.html
   #  - package.json

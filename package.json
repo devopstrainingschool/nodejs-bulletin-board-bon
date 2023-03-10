@@ -21,5 +21,6 @@
   },
   "scripts": {
     "start": "node server.js > app.log 2> error.log &"
+    "build": "react-scripts build"
   }
 }

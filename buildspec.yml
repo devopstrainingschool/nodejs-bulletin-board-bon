@@ -24,7 +24,7 @@ artifacts:
   files:
     - "**/*"
     - discard-paths: no
-    - base-directory: build
+    - base-directory: .
    # - app.js
   #  - index.html
   #  - package.json

@@ -20,7 +20,7 @@
     "morgan": "^1.6.1"
   },
   "scripts": {
-    "start": "node server.js > app.log 2> error.log &"
+    "start": "node server.js > app.log 2> error.log &",
     "build": "react-scripts build"
   }
 }

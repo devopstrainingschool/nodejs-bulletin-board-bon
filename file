@@ -1,0 +1,54 @@
+
+pipeline {
+  agent any
+
+  stages {
+ 
+    stage('docker image') {
+       
+      steps {
+       dir('bulletin-board-app'){
+       withDockerRegistry([ credentialsId: "Docker_creds", url: "https://index.docker.io/v1/" ]) {
+       sh 'docker build -t devopstrainingschool/java-nodejs-jenkins . -f Dockerfile'
+       sh 'docker push devopstrainingschool/java-nodejs-jenkins'
+        
+        }
+       
+        
+        }
+         
+      }
+     }
+     
+     
+     stage ('Sonarqube analysis and testing'){
+      environment {
+            scannerHome = tool 'yannick'
+        }
+      steps{
+        script{
+          withSonarQubeEnv('sonarserver'){
+            sh '''
+            ${scannerHome}/bin/sonar-scanner 
+            
+            '''
+             
+          }
+        }
+      }
+    }    
+   stage ("Quality Gate Check") {
+      steps {
+        script {
+           timeout(time: 1, unit: 'HOURS') { 
+        def qg = waitForQualityGate() 
+        if (qg.status != 'OK') {
+             error "Pipeline aborted due to quality gate failure: ${qg.status}"
+        }
+           }
+        }
+      }
+    }
+     
+      }
+      }
